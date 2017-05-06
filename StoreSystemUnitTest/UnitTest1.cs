@@ -9,6 +9,7 @@ namespace StoreSystemUnitTest
         [TestMethod]
         public void TestMethod1()
         {
+            // Test
         }
     }
 }
