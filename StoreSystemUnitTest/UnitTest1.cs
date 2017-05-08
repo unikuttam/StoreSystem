@@ -1,18 +1,18 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using StoreSystem;
 namespace StoreSystemUnitTest
 {
     [TestClass]
     public class UnitTest1
     {
-        [TestMethod]
-        public void TestMethod1()
-        {
-            // All I know is list of products, Discount Rules and Interface of Checkout
-            // Very first thing i need is Interface for Price List because without that I can't proceed 
-            
+        private ICheckOut _checkout;
 
+        [TestMethod]
+        public void ReturnZeroWhenNoItemScanned()
+        {
+            _checkout = new CheckOut();
+           Assert.AreEqual (_checkout.GetTotalPrice(), 0);
         }
     }
 }
