@@ -9,7 +9,10 @@ namespace StoreSystemUnitTest
         [TestMethod]
         public void TestMethod1()
         {
-            // Test
+            // All I know is list of products, Discount Rules and Interface of Checkout
+            // Very first thing i need is Interface for Price List because without that I can't proceed 
+            
+
         }
     }
 }
