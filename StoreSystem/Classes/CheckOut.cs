@@ -1,21 +1,33 @@
-﻿using System;
+﻿using StoreSystem.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreSystem
+namespace StoreSystem.Classes
 {
     public class CheckOut : ICheckOut
     {
+        public IList<Product> ProductItems
+        {
+            get { return _productItems; }
+            set { _productItems = value; }
+        }
         private IList<string> _scannedItems = new List<string>();
-       
+        private IList<Product> _productItems;
+
         public int GetTotalPrice()
         {
-            if (_scannedItems == null || _scannedItems.Count == 0)
+            int total = 0;
+            if (_productItems == null || _productItems.Count == 0)
                 return 0;
-            else
-                return - 1;
+            
+            foreach(Product p in _productItems)
+            {
+                total = _productItems.Sum(x => x.Price);
+            }
+            return total;
         }
 
         public void Scan(string item)
