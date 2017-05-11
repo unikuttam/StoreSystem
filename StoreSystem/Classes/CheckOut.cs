@@ -22,10 +22,14 @@ namespace StoreSystem.Classes
             int total = 0;
             if (_productItems == null || _productItems.Count == 0)
                 return 0;
-            
-            foreach(Product p in _productItems)
+
+            foreach (string item in _scannedItems)
             {
-                total = _productItems.Sum(x => x.Price);
+                IList<Product> products = _productItems.Where(x => x.Item == item).ToList();
+                foreach(Product p in products)
+                {
+                    total += p.Price;
+                }
             }
             return total;
         }
