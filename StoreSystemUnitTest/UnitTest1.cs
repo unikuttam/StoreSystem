@@ -22,53 +22,63 @@ namespace StoreSystemUnitTest
             _checkout = new CheckOut();
             _checkout.ProductItems = Products;
         }
+
         [TestMethod]
         public void ReturnZeroWhenNoItemScanned()
         {
            Assert.AreEqual (_checkout.GetTotalPrice(), 0);
         }
+
         [TestMethod]
         public void TestIndividualProducts_A()
         {
             _checkout.Scan("A");
             Assert.AreEqual(_checkout.GetTotalPrice(),50);
         }
+
+        [TestMethod]
         public void TestIndividualProducts_B()
         {
             _checkout.Scan("B");
             Assert.AreEqual(_checkout.GetTotalPrice(), 30);
         }
+
+        [TestMethod]
         public void TestIndividualProducts_C()
         {
             _checkout.Scan("C");
             Assert.AreEqual(_checkout.GetTotalPrice(), 20);
         }
+
+        [TestMethod]
         public void TestIndividualProducts_D()
         {
-            _checkout = new CheckOut();
             _checkout.Scan("D");
             Assert.AreEqual(_checkout.GetTotalPrice(), 15);
         }
-            public void TestAllProductsOneEach()
+
+        [TestMethod]
+        public void TestAllProductsOneEach()
             {
-                _checkout = new CheckOut();
                 _checkout.Scan("A");
                 _checkout.Scan("B");
                 _checkout.Scan("C");
                 _checkout.Scan("D");
-            Assert.AreEqual(_checkout.GetTotalPrice(), 115);
+                Assert.AreEqual(_checkout.GetTotalPrice(), 115);
             }
-            public void TestRule1Single()
+
+        [TestMethod]
+        public void TestRule1Single()
             {
-                _checkout = new CheckOut();
                 _checkout.Scan("A");
                 _checkout.Scan("A");
                 _checkout.Scan("A");
                 Assert.AreEqual(_checkout.GetTotalPrice(), 130);
             }
-            public void TestRule1MultipleButEqualSets()
+
+        [TestMethod]
+        public void TestRule1MultipleButEqualSets()
             {
-                _checkout = new CheckOut();
                 _checkout.Scan("A");
                 _checkout.Scan("A");
                 _checkout.Scan("A");
@@ -80,9 +90,10 @@ namespace StoreSystemUnitTest
                 _checkout.Scan("A");
             Assert.AreEqual(_checkout.GetTotalPrice(), 390);
             }
+
+        [TestMethod]
         public void TestRule1MixAndMatch()
         {
-            _checkout = new CheckOut();
             _checkout.Scan("A");
             _checkout.Scan("A");
             _checkout.Scan("A");
@@ -90,31 +101,32 @@ namespace StoreSystemUnitTest
             _checkout.Scan("A");
             Assert.AreEqual(_checkout.GetTotalPrice(), 230);
         }
+
+        [TestMethod]
         public void TestRule2Single()
         {
-            _checkout = new CheckOut();
             _checkout.Scan("B");
             _checkout.Scan("B");
             Assert.AreEqual(_checkout.GetTotalPrice(), 45);
         }
+
+        [TestMethod]
         public void TestRule2MultipleButEqualSets()
         {
-            _checkout = new CheckOut();
             _checkout.Scan("B");
             _checkout.Scan("B");
             _checkout.Scan("B");
             _checkout.Scan("B");
-            Assert.AreEqual(_checkout.GetTotalPrice(), 180);
+            Assert.AreEqual(_checkout.GetTotalPrice(), 90);
         }
+
+        [TestMethod]
         public void TestRule2MixAndMatch()
         {
-            _checkout = new CheckOut();
             _checkout.Scan("B");
             _checkout.Scan("B");
             _checkout.Scan("B");
             Assert.AreEqual(_checkout.GetTotalPrice(), 75);
         }
-
-
     }
 }

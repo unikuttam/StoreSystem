@@ -16,33 +16,45 @@ namespace StoreSystem.Classes
         }
         private IList<string> _scannedItems = new List<string>();
         private IList<Product> _productItems;
+        private Dictionary<string, int> _basket = new Dictionary<string, int>();
 
         public int GetTotalPrice()
         {
             int total = 0;
-            IDictionary<string, int> basket = new Dictionary<string, int>();            
             if (_scannedItems == null || _scannedItems.Count == 0)
                 return 0;
 
             foreach (Product p in _productItems)
             {
                 int count = _scannedItems.Count(s => s.Contains(p.Item));
-                basket.Add(p.Item, count);
+                _basket.Add(p.Item, count);
             }
-            total = GetAppliedDiscountedTotal(basket);
+            total = GetAppliedDiscountedTotal(_basket);
             return total;
         }
 
-        private int GetAppliedDiscountedTotal(IDictionary<string, int> basket)
+        private int GetAppliedDiscountedTotal(Dictionary<string, int> basket)
         {
-            foreach (Product p in _productItems)
+            int total = 0;
+            foreach (string key in basket.Keys )
             {
-                if(p.Discount!=null)
+                for(int i = 0; i!=_productItems.Count; i++)
                 {
-
+                    if(_productItems[i].Item==key)
+                    {
+                        if(_productItems[i].Discount==null)
+                        {
+                            total += basket[key] * _productItems[i].Price;
+                        }
+                        else
+                        {
+                            total+=basket[key] % _productItems[i].Discount.Quantity * _productItems[i].Price +
+                                basket[key] / _productItems[i].Discount.Quantity * _productItems[i].Discount.DiscountPrice;
+                        }
+                    }
                 }
             }
-            return 0;
+            return total;
         }
 
         public void Scan(string item)
