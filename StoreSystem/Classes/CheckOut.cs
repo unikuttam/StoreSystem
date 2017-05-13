@@ -20,18 +20,29 @@ namespace StoreSystem.Classes
         public int GetTotalPrice()
         {
             int total = 0;
-            if (_productItems == null || _productItems.Count == 0)
+            IDictionary<string, int> basket = new Dictionary<string, int>();            
+            if (_scannedItems == null || _scannedItems.Count == 0)
                 return 0;
 
-            foreach (string item in _scannedItems)
+            foreach (Product p in _productItems)
             {
-                IList<Product> products = _productItems.Where(x => x.Item == item).ToList();
-                foreach(Product p in products)
+                int count = _scannedItems.Count(s => s.Contains(p.Item));
+                basket.Add(p.Item, count);
+            }
+            total = GetAppliedDiscountedTotal(basket);
+            return total;
+        }
+
+        private int GetAppliedDiscountedTotal(IDictionary<string, int> basket)
+        {
+            foreach (Product p in _productItems)
+            {
+                if(p.Discount!=null)
                 {
-                    total += p.Price;
+
                 }
             }
-            return total;
+            return 0;
         }
 
         public void Scan(string item)
