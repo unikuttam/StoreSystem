@@ -128,5 +128,26 @@ namespace StoreSystemUnitTest
             _checkout.Scan("B");
             Assert.AreEqual(_checkout.GetTotalPrice(), 75);
         }
+        [TestMethod]
+        public void MixAndMatchAllProducts()
+        {
+            _checkout.Scan("C");
+            _checkout.Scan("A");
+            _checkout.Scan("A");
+            _checkout.Scan("A");
+            _checkout.Scan("B");
+            _checkout.Scan("B");
+            _checkout.Scan("C");
+            _checkout.Scan("D");
+            _checkout.Scan("D");
+            _checkout.Scan("A");
+            _checkout.Scan("A");
+            _checkout.Scan("B");
+            _checkout.Scan("C");
+
+
+            Assert.AreEqual(_checkout.GetTotalPrice(), 395);
+        }
+
     }
 }
