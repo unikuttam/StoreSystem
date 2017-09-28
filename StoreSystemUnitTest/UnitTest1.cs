@@ -33,7 +33,7 @@ namespace StoreSystemUnitTest
         public void TestIndividualProducts_A()
         {
             _checkout.Scan("A");
-            Assert.AreEqual(_checkout.GetTotalPrice(),505);
+            Assert.AreEqual(_checkout.GetTotalPrice(),50);
         }
 
         [TestMethod]
